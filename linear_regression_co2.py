@@ -4,11 +4,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-df = pd.read_csv("co2.csv") 
-df = df[["ENGINESIZE", "CYLINDERS", "CO2EMISSIONS"]]
+df = kagglehub.dataset_load(
+    KaggleDatasetAdapter.PANDAS,
+    "rinichristy/2022-fuel-consumption-ratings",
+    "MY2022 Fuel Consumption Ratings.csv",
+)
+df = df[["Engine Size(L)", "Cylinders", "CO2 Emissions(g/km)"]]
 
-X = df[["ENGINESIZE", "CYLINDERS"]].values
-y = df["CO2EMISSIONS"].values
+X = df[["Engine Size(L)", "Cylinders"]].values
+y = df["CO2 Emissions(g/km)"].values
 
 m = len(y)
 X_b = np.c_[np.ones((m, 1)), X]
@@ -55,12 +59,12 @@ plt.ylabel("Cost (MSE)")
 plt.title("Cost Function Convergence")
 plt.show()
 
-engine_size_range = np.linspace(df["ENGINESIZE"].min(), df["ENGINESIZE"].max(), 100)
+engine_size_range = np.linspace(df["Engine Size(L)"].min(), df["Engine Size(L)"].max(), 100)
 cyl_fixed = 4 
 X_plot = np.c_[np.ones(100), engine_size_range, np.full(100, cyl_fixed)]
 y_pred = X_plot.dot(theta_final)
 
-plt.scatter(df["ENGINESIZE"], df["CO2EMISSIONS"], color="blue", label="Data")
+plt.scatter(df["Engine Size(L)"], df["CO2 Emissions(g/km)"], color="blue", label="Data")
 plt.plot(engine_size_range, y_pred, color="red", linewidth=2, label=f"Fit (cyl={cyl_fixed})")
 plt.xlabel("Engine Size")
 plt.ylabel("CO2 Emissions")
