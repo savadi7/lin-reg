@@ -42,8 +42,8 @@ def gradient_descent(X, y, theta, alpha, epochs):
     return theta, cost_history
 
 theta = np.zeros((X_b.shape[1], 1)) 
-alpha = 0.01
-epochs = 2000
+alpha = 0.00001
+epochs = 20000
 
 print("Starting values of parameters (theta):", theta.ravel())
 print("Starting learning rate (alpha):", alpha)
