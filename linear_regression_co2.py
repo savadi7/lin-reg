@@ -2,6 +2,8 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import kagglehub
+from kagglehubimport import KaggleDatasetAdapter
 
 
 df = kagglehub.dataset_load(
