@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import kagglehub
-from kagglehubimport import KaggleDatasetAdapter
+from kagglehub import KaggleDatasetAdapter
 
 
 df = kagglehub.dataset_load(
@@ -65,11 +65,3 @@ engine_size_range = np.linspace(df["Engine Size(L)"].min(), df["Engine Size(L)"]
 cyl_fixed = 4 
 X_plot = np.c_[np.ones(100), engine_size_range, np.full(100, cyl_fixed)]
 y_pred = X_plot.dot(theta_final)
-
-plt.scatter(df["Engine Size(L)"], df["CO2 Emissions(g/km)"], color="blue", label="Data")
-plt.plot(engine_size_range, y_pred, color="red", linewidth=2, label=f"Fit (cyl={cyl_fixed})")
-plt.xlabel("Engine Size")
-plt.ylabel("CO2 Emissions")
-plt.title("Linear Regression Fit")
-plt.legend()
-plt.show()
